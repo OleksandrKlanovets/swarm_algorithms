@@ -9,7 +9,7 @@ class Swarm:
     # D - dimension of the search space;
     # N - number of particles to generate;
     # w, c1, c2 - model parameters;
-    # fitness_function - function to optimize;
+    # fitness_function - function of vector of parameters X to optimize;
     # p_range - range of particles' coordinates' values (from -range to range);
     # iter_num - maximum number of iterations.
     def __init__(self, D, N, w, c1, c2, fitness_function, p_range, iter_num):
@@ -23,8 +23,7 @@ class Swarm:
         self.p_range = p_range
         self.iter_num = iter_num
         self.group_best_score = float('inf')
-        rnd_point = np.random.rand(D) * np.power(np.full(D, -1), np.random.randint(2, size = D)) * p_range
-        self.group_best_position = rnd_point
+        self.group_best_position = np.copy(self.particles[np.random.randint(N)].coordinates)
 
     # Updates best group position and score (is called at every iteration).
     def __update_group_best(self):
@@ -105,9 +104,6 @@ class Swarm:
 
         # Plot particles at their initial position.
         plotted_particles = self.__plot_particles()
-        
-        # Initial update.
-        self.__update_group_best()
 
         # Create the animation itself
         animation = FuncAnimation(fig, self.__animate, frames=f_num, interval=i_duration, 
