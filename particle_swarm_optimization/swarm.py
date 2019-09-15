@@ -22,8 +22,11 @@ class Swarm:
         self.fitness_function = fitness_function
         self.p_range = p_range
         self.iter_num = iter_num
-        self.group_best_score = float('inf')
-        self.group_best_position = np.copy(self.particles[np.random.randint(N)].coordinates)
+
+        # Setting random particle as group's initial best position
+        rnd_particle = self.particles[np.random.randint(N)]
+        self.group_best_position = np.copy(rnd_particle.coordinates)
+        self.group_best_score = fitness_function(rnd_particle.coordinates)
 
     # Updates best group position and score (is called at every iteration).
     def __update_group_best(self):
