@@ -15,7 +15,7 @@ class Firefly:
         # return beta_zero / (1 + gamma * distance * distance)
         return beta_zero * np.exp(-gamma * distance * distance)
 
-    def move_towards_firefly(self, firefly, beta_zero, alfa, gamma):
+    def move_towards_firefly(self, firefly, beta_zero, alfa, gamma, lambd, gbest_pos):
         current_beta = self.__beta(firefly, beta_zero, gamma)
         diff = self.coordinates - firefly.coordinates
         urand_n = np.multiply(
@@ -23,3 +23,4 @@ class Firefly:
             np.random.rand(self.D)
         )
         self.coordinates = firefly.coordinates + current_beta * diff + alfa * urand_n
+        self.coordinates += lambd * np.multiply(urand_n, self.coordinates - gbest_pos)

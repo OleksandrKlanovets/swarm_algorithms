@@ -3,12 +3,14 @@ from firefly import Firefly
 
 
 class FireflySwarm:
-    def __init__(self, D, N, beta_zero, alfa, gamma, fitness_func, iter_num, p_range):
+    def __init__(self, D, N, beta_0, alfa_0, alfa_inf, gamma, lambd, fitness_func, iter_num, p_range):
         self.D = D
         self.N = N
-        self.beta_zero = beta_zero
-        self.alfa = alfa
+        self.beta_0 = beta_0
+        self.alfa_0 = alfa_0
+        self.alfa_inf = alfa_inf
         self.gamma = gamma
+        self.lambd = lambd
         self.fitness_func = fitness_func
         self.iter_num = iter_num
         self.p_range = p_range
@@ -28,6 +30,7 @@ class FireflySwarm:
 
     def optimize(self):
         t = 0
+        alfa = self.alfa_0
         while(t < self.iter_num):
             for i in range(self.N):
                 for j in range(0, i):
@@ -36,10 +39,13 @@ class FireflySwarm:
                     if self.fitness_func(f_j) < self.fitness_func(f_i):
                         self.fireflies[i].move_towards_firefly(
                             self.fireflies[j],
-                            self.beta_zero,
-                            self.alfa,
-                            self.gamma
+                            self.beta_0,
+                            alfa,
+                            self.gamma,
+                            self.lambd,
+                            self.group_best_position
                         )
+                alfa = self.alfa_inf + (self.alfa_0 - self.alfa_inf) * np.exp(-t)
             t += 1
-        self.__update_group_best()
+            self.__update_group_best()
         return self.group_best_position
