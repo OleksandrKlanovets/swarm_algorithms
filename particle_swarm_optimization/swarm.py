@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import particle
+from particle import Particle
 
 
 # Class, which describes our model, it's states of the optimization process.
@@ -14,7 +14,7 @@ class Swarm:
     # p_range - range of particles' coordinates' values (from -range to range);
     # iter_num - maximum number of iterations.
     def __init__(self, D, N, w, c1, c2, fitness_function, p_range, iter_num):
-        self.particles = [particle.Particle(D, p_range) for _ in range(N)]
+        self.particles = [Particle(D, p_range) for _ in range(N)]
         self.dimension = D
         self.particles_num = N
         self.w = w
