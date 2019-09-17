@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import particle
 
+
 # Class, which describes our model, it's states of the optimization process.
 # Also contains methods for visualizing how the algorithm works.
 class Swarm:
@@ -113,7 +114,6 @@ class Swarm:
                                   fargs=(plotted_particles,), blit=True, repeat=False)
 
         plt.show()
-
 
     def __str__(self):
         return 'Best one:{0}'.format(self.group_best_position)

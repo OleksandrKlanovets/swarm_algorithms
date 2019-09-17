@@ -1,6 +1,7 @@
 import numpy as np
 import random as rand
 
+
 # Class, which describes a single particle of a swarm.
 class Particle:
     # D - dimension of a search space;
@@ -25,8 +26,7 @@ class Particle:
         current_score = fitness_function(self.coordinates)
         if current_score < self.best_score:
             self.best_position = np.copy(self.coordinates)
-            self.best_score = current_score
-
+            self.best_score = current_scoreS
 
     def __str__(self):
         return (
