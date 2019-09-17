@@ -49,6 +49,7 @@ class Swarm:
             self.__move_all()
             self.__update_group_best()
             i += 1
+        return self.group_best_position
 
     # Plots the particles at their current position.
     def __plot_particles(self):
