@@ -1,6 +1,7 @@
 import numpy as np
 from wolf import Wolf
 
+
 # Class, which represents a wolf pack.
 class Pack:
     # D - dimension of the search space;

@@ -2,8 +2,11 @@ import numpy as np
 import random as rand
 
 
+# Class, which represents a single firefly in a swarm.
 class Firefly:
-    def __init__(self, D, p_range=50):
+    # D - dimension of a search space;
+    # p_range - range of coordinates' values (from -range to range).
+    def __init__(self, D, p_range):
         self.D = D
         self.p_range = p_range
         self.coordinates = np.random.rand(D) * p_range
@@ -11,10 +14,13 @@ class Firefly:
 
     # Gets attractiveness for another firefly.
     def __beta(self, firefly, beta_zero, gamma):
+        # Euclidian distance between two fireflies.
         distance = np.linalg.norm(self.coordinates - firefly.coordinates)
-        # return beta_zero / (1 + gamma * distance * distance)
-        return beta_zero * np.exp(-gamma * distance * distance)
+        # We can rewrite the attractiveness function as follows:
+        #   beta_zero * np.exp(-gamma * distance * distance)
+        return beta_zero / (1 + gamma * distance * distance)
 
+    # Move a firefly towards another one.
     def move_towards_firefly(self, firefly, beta_zero, alfa, gamma, lambd, gbest_pos):
         current_beta = self.__beta(firefly, beta_zero, gamma)
         diff = self.coordinates - firefly.coordinates

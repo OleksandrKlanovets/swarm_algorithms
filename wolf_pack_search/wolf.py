@@ -1,6 +1,7 @@
 import numpy as np
 import random as rand
 
+
 # Class, which represents a single wolf of a pack.
 class Wolf:
     # D - dimension of a search space;
