@@ -41,7 +41,7 @@ class FireflySwarm:
     # Update position of all the fireflies in the swarm.
     def __move_all(self, alfa):
         for i in range(self.N):
-            for j in range(self.N):
+            for j in range(i):
                 if self.fireflies[j].score < self.fireflies[i].score:
                     # Move less attractive to more attractive.
                     self.fireflies[i].move_towards_firefly(
