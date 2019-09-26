@@ -93,10 +93,10 @@ class Swarm:
 
         # Get the values of the target function at cartesian_square(X, Y).
         Z = []
-        for i in range(X.__len__()):
+        for i in range(Y.__len__()):
             temp = []
-            for j in range(Y.__len__()):
-                temp.append(self.fitness_function(np.array([X[i], Y[j]])))
+            for j in range(X.__len__()):
+                temp.append(self.fitness_function(np.array([X[j], Y[i]])))
             Z.append(temp)
 
         # Plot the target function colormap.
