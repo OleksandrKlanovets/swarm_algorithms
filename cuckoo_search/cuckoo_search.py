@@ -44,10 +44,9 @@ class CuckooSearch:
         
         return self.gbest
 
-    # Generates new nest at random position with each coordinate at range (-c_range; c_range).
+    # Generates a new nest at random position with each coordinate at range (-c_range; c_range).
     def __generate_nest(self):
-        new_nest_coords = np.random.rand(self.D) * self.c_range
-        new_nest_coords *= np.power(np.full(self.D, -1), np.random.randint(2, size = self.D))
+        new_nest_coords = np.random.rand(self.D) * 2 * self.c_range - self.c_range
         return new_nest_coords
 
     # Evaluates new solutions and gets current best.

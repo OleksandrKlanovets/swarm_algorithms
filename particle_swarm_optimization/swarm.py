@@ -87,8 +87,8 @@ class Swarm:
         fig = plt.figure()
 
         # Create a grid for displaying the search space.
-        X = np.arange(-self.p_range, self.p_range, step)
-        Y = np.arange(-self.p_range, self.p_range, step)
+        X = np.arange(-self.p_range - 1, self.p_range + 1, step)
+        Y = np.arange(-self.p_range - 1, self.p_range + 1, step)
         # XX, YY = np.meshgrid(X, Y)
 
         # Get the values of the target function at cartesian_square(X, Y).

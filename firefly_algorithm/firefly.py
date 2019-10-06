@@ -10,8 +10,7 @@ class Firefly:
     def __init__(self, D, p_range, fit_func):
         self.D = D
         self.p_range = p_range
-        self.coordinates = np.random.rand(D) * p_range
-        self.coordinates *= np.power(np.full(D, -1), np.random.randint(2, size = D))
+        self.coordinates = np.random.rand(D) * 2 * p_range - p_range
         self.score = fit_func(self.coordinates)
 
     # Gets attractiveness for another firefly.

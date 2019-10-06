@@ -1,5 +1,4 @@
 import numpy as np
-import random as rand
 
 
 # Class, which represents a single wolf of a pack.
@@ -9,8 +8,7 @@ class Wolf:
     def __init__(self, D, w_range):
         self.dimension = D
         self.w_range = w_range
-        self.coordinates = np.random.rand(D) * w_range
-        self.coordinates *= np.power(np.full(D, -1), np.random.randint(2, size = D))
+        self.coordinates = np.random.rand(D) * 2 * w_range - w_range
 
     def move(self, group_best_pos, step):
         # print('----------------------------------')
