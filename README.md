@@ -6,4 +6,4 @@ This repository contains examples of so called swarm intelligence algorithms imp
 
 The purpose of this repository is to implement the algorithms from scratch and get better understanding of how they actually work. This code is not intended to be used for production.
 
-For now actually, it only contains particle swarm optimization and firefly search algorithms implementation, but there will be more in the future, including jupyter notebook demos to have fun with.
+There will be more content in the future, including jupyter notebook demos to have fun with.
