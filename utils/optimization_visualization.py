@@ -158,4 +158,4 @@ def visualize_optimization(model, frames_num=100, iteration_duration=200):
         fargs=(model, plotted_particles), 
         repeat=False
     )
-    plt.show()
+    return animation
