@@ -64,8 +64,8 @@ def plot_particles(model):
     X_gbest = model.particles[gbest_index, 0]
     Y_gbest = model.particles[gbest_index, 1]
 
-    NON_GBEST_SIZE = 12
-    GBEST_SIZE = 18
+    NON_GBEST_SIZE = 8
+    GBEST_SIZE = 12
     plotted_particles, = plt.plot(X, Y, marker='X', color='r', 
                                   linewidth=0, markersize=NON_GBEST_SIZE)
     gbest, = plt.plot(X_gbest, Y_gbest, marker='*', color='y',
@@ -125,9 +125,7 @@ def visualize_optimization(model, frames_num=100, iteration_duration=200):
     model.max_iter = 1
 
     # Create a figure to visualize on.
-    PLOT_WIDTH = 10
-    PLOT_HEIGHT = 8
-    fig = plt.figure(figsize=(PLOT_WIDTH, PLOT_HEIGHT))
+    fig = plt.figure()
 
     # Define bounds.
     l_bound = np.min(model.l_bounds)
