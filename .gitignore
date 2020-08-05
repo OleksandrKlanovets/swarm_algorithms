@@ -6,3 +6,6 @@ __pycache__/
 
 # Enviroment
 /venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
