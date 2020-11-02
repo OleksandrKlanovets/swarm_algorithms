@@ -16,7 +16,7 @@ def plot_function(func, l_bound, u_bound, step):
     u_bound : float
         Upper bound for X and Y axes.
     step : float
-        Spacing between points, which is used to calculate 
+        Spacing between points, which is used to calculate
         fitness-function value for each particle.
 
     Returns
@@ -29,9 +29,9 @@ def plot_function(func, l_bound, u_bound, step):
 
     # Get the values of the target function at cartesian_square(X, Y).
     Z = []
-    for i in range(Y.__len__()):
+    for i in range(len(Y)):
         temp = []
-        for j in range(X.__len__()):
+        for j in range(len(X)):
             temp.append(func(np.array([X[j], Y[i]])))
         Z.append(temp)
 
@@ -92,7 +92,7 @@ def animate(i, model, plotted_particles):
     '''
     if i > 1:
         model.optimize()
-    
+
     indices = np.arange(model.N)
     gbest_index = np.argmin(model.scores)
     gbest = model.particles[gbest_index]
@@ -130,7 +130,7 @@ def visualize_optimization(model, frames_num=100, iteration_duration=200):
     # Define bounds.
     l_bound = np.min(model.l_bounds)
     u_bound = np.max(model.u_bounds)
-    
+
     FRACTION_DEGREE = 100
     step = (u_bound - l_bound) / FRACTION_DEGREE
 
@@ -149,11 +149,11 @@ def visualize_optimization(model, frames_num=100, iteration_duration=200):
     plotted_particles = plot_particles(model)
 
     animation = FuncAnimation(
-        fig, 
-        animate, 
-        frames=frames_num, 
+        fig,
+        animate,
+        frames=frames_num,
         interval=iteration_duration,
-        fargs=(model, plotted_particles), 
+        fargs=(model, plotted_particles),
         repeat=False
     )
     return animation
