@@ -25,7 +25,7 @@ class CuckooSearch(SwarmAlgorithm):
     params : CuckooSearchParams
         Model behavioral parameters.
     bounds : ndarray
-        A 2 by D matrix containing lower and upper bounds of the search space 
+        A 2 by D matrix containing lower and upper bounds of the search space
         for each dimension.
     seed : int, optional, default=None
         Random generator seed.
@@ -33,7 +33,7 @@ class CuckooSearch(SwarmAlgorithm):
         Maximum number of iterations (generations).
     stag_iter : int, optional, default=100
         Specifies the allowed number of iterations without solution improvement
-        by equal or more than a given tolerance e. If the number is exceeded, 
+        by equal or more than a given tolerance e. If the number is exceeded,
         the optimization process stagnation occurs and the algorithm stops.
     e : float, optional, default=1e-5
         Tolerance.
@@ -50,7 +50,7 @@ class CuckooSearch(SwarmAlgorithm):
         An array of size N representing the value of the fitness function
         for each particle.
     gbest : ndarray
-        A D-dimensional vector representing the position of the current 
+        A D-dimensional vector representing the position of the current
         global best particle.
     gbest_score : float
         The value of the fitness function for the current global best particle.
@@ -59,12 +59,12 @@ class CuckooSearch(SwarmAlgorithm):
     '''
     def __init__(self, D, N, fit_func, params, bounds, seed=None, max_iter=100,
                  stag_iter=100, e=0.00001):
-        super().__init__(D, N, fit_func, params, bounds, seed, max_iter, 
+        super().__init__(D, N, fit_func, params, bounds, seed, max_iter,
                          stag_iter, e)
 
         # Levy flight's coefficient calculation.
         self.beta = 1.5
-        self.sigma = math.gamma(1 + self.beta) 
+        self.sigma = math.gamma(1 + self.beta)
         self.sigma *= math.sin(math.pi * self.beta / 2)
         # math.gamma((1 + self.beta) / 2) * self.beta * 2 ** ((self.beta - 1) / 2)
         denominator = math.gamma((1 + self.beta) / 2)
@@ -83,7 +83,6 @@ class CuckooSearch(SwarmAlgorithm):
         Returns
         -------
         No value.
-        
         '''
         self.xi = new_params.xi
         self.alpha = new_params.alpha
@@ -100,7 +99,7 @@ class CuckooSearch(SwarmAlgorithm):
         -------
         ndarray
             The coordinates of the global best particle at the end of
-            the optimization process. 
+            the optimization process.
         '''
         i = 0
         # Initialize stagnating iterations counter.
@@ -172,7 +171,7 @@ class CuckooSearch(SwarmAlgorithm):
 
     def __empty_nests(self):
         '''
-        Replaces a fraction of nests (determined by xi) by generating 
+        Replaces a fraction of nests (determined by xi) by generating
         new solutions.
 
         Parameters

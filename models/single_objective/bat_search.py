@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import math
 from collections import namedtuple
 from models.swarm_algorithm import SwarmAlgorithm
@@ -26,7 +25,7 @@ class BatSearch(SwarmAlgorithm):
     params : BatSearchParams
         Model behavioral parameters.
     bounds : ndarray
-        A 2 by D matrix containing lower and upper bounds of the search space 
+        A 2 by D matrix containing lower and upper bounds of the search space
         for each dimension.
     seed : int, optional, default=None
         Random generator seed.
@@ -34,7 +33,7 @@ class BatSearch(SwarmAlgorithm):
         Maximum number of iterations (generations).
     stag_iter : int, optional, default=100
         Specifies the allowed number of iterations without solution improvement
-        by equal or more than a given tolerance. If the number is exceeded, 
+        by equal or more than a given tolerance. If the number is exceeded,
         the optimization process stagnations occurs and the algorithm stops.
     e : float, optional, default=1e-5
         Tolerance.
@@ -61,7 +60,7 @@ class BatSearch(SwarmAlgorithm):
         An array of size N representing the value of the fitness function
         for each particle.
     gbest : ndarray
-        A D-dimensional vector representing the position of the current 
+        A D-dimensional vector representing the position of the current
         global best particle.
     gbest_score : float
         The value of the fitness function for the current global best particle.
@@ -148,7 +147,7 @@ class BatSearch(SwarmAlgorithm):
         No value.
         '''
         apply_indices = np.random.rand(self.N) > self.rates
-        apply_size = np.sum(apply_indices) 
+        apply_size = np.sum(apply_indices)
 
         rand_coefs = np.random.normal(size=(apply_size, self.D))
         new_solutions[apply_indices] = np.copy(self.gbest)
@@ -168,7 +167,7 @@ class BatSearch(SwarmAlgorithm):
         -------
         ndarray
             The coordinates of the global best particle at the end of
-            the optimization process. 
+            the optimization process.
         '''
         i = 0
         stag_count = 0
@@ -188,7 +187,7 @@ class BatSearch(SwarmAlgorithm):
             # Increase rate and reduce loudness.
             self.loudness[apply_indices] *= self.alpha
             self.rates[apply_indices] = self.r_0 * (1 - math.exp(-self.gamma * (i + 1)))
-                
+    
             self.update_best()
             self.eval_num += self.N
             i += 1

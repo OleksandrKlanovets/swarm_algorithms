@@ -1,5 +1,4 @@
 import numpy as np
-import math
 from collections import namedtuple
 from models.swarm_algorithm import SwarmAlgorithm
 
@@ -25,7 +24,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
     params : FireflyAlgorithmParams
         Model behavioral parameters.
     bounds : ndarray
-        A 2 by D matrix containing lower and upper bounds of the search space 
+        A 2 by D matrix containing lower and upper bounds of the search space
         for each dimension.
     seed : int, optional, default=None
         Random generator seed.
@@ -33,7 +32,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
         Maximum number of iterations (generations).
     stag_iter : int, optional, default=100
         Specifies the allowed number of iterations without solution improvement
-        by equal or more than a given tolerance. If the number is exceeded, 
+        by equal or more than a given tolerance. If the number is exceeded,
         the optimization process stagnations occurs and the algorithm stops.
     e : float, optional, default=1e-5
         Tolerance.
@@ -52,7 +51,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
         Light absorption coefficient.
     lambd : float
         Randomization coefficient determining the weight of the third component
-        of the update rule, which coordinates the movement towards 
+        of the update rule, which coordinates the movement towards
         the global best solution.
     particles : ndarray
         An N by D array representing the swarm of N particles.
@@ -60,7 +59,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
         An array of size N representing the value of the fitness function
         for each particle.
     gbest : ndarray
-        A D-dimensional vector representing the position of the current 
+        A D-dimensional vector representing the position of the current
         global best particle.
     gbest_score : float
         The value of the fitness function for the current global best particle.
@@ -69,7 +68,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
     '''
     def __init__(self, D, N, fit_func, params, bounds, seed=None, max_iter=100,
                  stag_iter=100, e=0.0001):
-        super().__init__(D, N, fit_func, params, bounds, seed, max_iter, 
+        super().__init__(D, N, fit_func, params, bounds, seed, max_iter,
                          stag_iter, e)
 
     def reset(self):
@@ -98,7 +97,6 @@ class FireflyAlgorithm(SwarmAlgorithm):
         Returns
         -------
         No value.
-        
         '''
         self.beta_0 = new_params.beta_0
         self.alpha_0 = new_params.alpha_0
@@ -118,7 +116,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
         -------
         ndarray
             The coordinates of the global best particle at the end of
-            the optimization process. 
+            the optimization process.
         '''
         i = 0
         # Initialize stagnating iterations counter.
@@ -148,7 +146,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
                 stag_count += 1
             elif stag_count > 0:
                 stag_count = 0
-            
+
             prev_best_score = self.gbest_score
         return self.gbest
 
@@ -163,7 +161,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
             A vector representing firefly to move.
         f2 : ndarray
             A vector representing firefly to move to.
-        
+
         Returns
         -------
         No value.
@@ -174,7 +172,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
         # Get the attractiveness of the firefly we want to fly to.
         # beta = self.beta_0 * math.exp(-self.gamma * r ** 2)
         beta = self.beta_0 / (1 + self.gamma * r ** 2)
-        
+
         diff = f2 - f1
         urand_1 = np.random.randn(self.D)
 
@@ -182,9 +180,9 @@ class FireflyAlgorithm(SwarmAlgorithm):
         f1 += beta * diff + self.alpha * urand_1
 
         # Modifications:
-        # Add an extra term to the flight formula, which uses global best 
+        # Add an extra term to the flight formula, which uses global best
         # solution to improve the efficiency.
-        urand_2 = np.random.randn(self.D)        
+        urand_2 = np.random.randn(self.D)
         f1 += self.lambd * urand_2 * (self.gbest - f1)
 
     def __move_all(self):
@@ -211,7 +209,7 @@ class FireflyAlgorithm(SwarmAlgorithm):
 
     def __reduce_alpha(self, iteration):
         '''
-        Reduces alfa as the number of iterations increases. 
+        Reduces alfa as the number of iterations increases.
         Optional modification.
 
         Parameters
